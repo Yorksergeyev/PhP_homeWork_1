@@ -1,5 +1,6 @@
 <?php
-require "config/info.config.php";
+require $_SERVER['DOCUMENT_ROOT'].'/config/info.config.php';
+
 $title = "Незабываемый сайт";
 $comma = implode(", ", $keywords);
 $keywords = $comma;
@@ -13,16 +14,7 @@ require "includes/header.inc.php";
                 <img src="img/logo.png" alt="лого, компания, Nordic">
             </div>
             <nav class="nav">
-<?php
-
-while ($anchor = current($anchors)) {
-    $tem = key($anchors);
-    echo "<a href={$anchors[$tem][0]} class='nav__a'> {$anchors[$tem][1]} </a> ";
-    next($anchors);
-}
-
-?>
-
+<?=require $_SERVER['DOCUMENT_ROOT'] . '/includes/anchors.inc.php'; ?>
             </nav>
             <input type="text" id="temp_input">
             <button class="temp_button"> Клик</button>
@@ -48,15 +40,9 @@ while ($anchor = current($anchors)) {
         <div class="side_panel">
 <ul>
 
-<?php
-foreach ($anchors as $key => $value){
-    echo "<li> <a href= {$anchors[$key][0]} class='nav__a'> {$anchors[$key][1]} </a>  </li>";
-    next($anchors);
-}
-?>
-
-
-            </ul>
+<!-- здесь у нас пойдут ссылки -->
+<?=require $_SERVER['DOCUMENT_ROOT'] . '/includes/anchors.inc.php'; ?>
+    </ul>
         </div>
         <div class="promo" id="main">
             <h1 class="promo__h1">Только красивые путешествия</h1>
@@ -82,13 +68,8 @@ foreach ($anchors as $key => $value){
         </div>
 
         <div class="info">
-        <?php
-        for ($i=0; $i < count($parag); $i++) { 
-           echo" <p class='info__p'>
-                {$parag[$i]}
-            </p>";
-        }
-        ?>
+<?=require $_SERVER['DOCUMENT_ROOT'] . '/includes/parag.inc.php'; ?>
+
 
         </div>
 
@@ -102,56 +83,22 @@ foreach ($anchors as $key => $value){
         </div>
         <div class="reasons" id="about">
             <ul class="reasons__ul">
-<?php
-for ($i=0; $i < count($reasons); $i++) { 
-    echo " <li class='reasons__li'> {$reasons[$i][0]}  {$reasons[$i][1]}</li>";
-}
-?>
+    <?=require $_SERVER['DOCUMENT_ROOT'] . '/includes/reasons.inc.php';?>
             </ul>
         </div>
-
-<div class='cards'>
+        <div class="cards">
     <?php
-        foreach ($cards as $key => $value){
-        echo "<div class='card'>
-                <div class='card__img_wrap'>
-                <img src='{$cards[$key][0]}' alt='' class='card__img'>
-                </div>
-                <h5 class='card__h5'>{$cards[$key][1]}</h5>
-                <div class='card__line'></div>
-                <p class='card__p'>{$cards[$key][2 ]}</p>
-                </div>";
-                next($cards);
-            }
-            ?>
-</div>;
 
-<div class='wrap_panel'>
-<?php
-    foreach ($faq as $key => $value){
-        echo "<div class='wraper_faq'><div class='faq_panel'> <h5>{$faq[$key][0]} </h5></div>
-        <div class='faq_answer'> <p> {$faq[$key][1]}</p></div></div>";
-        next($faq);
-    }
-    ?> 
-</div> 
+require $_SERVER['DOCUMENT_ROOT'] . '/includes/cards.inc.php';
 
-<!-- <div class="wrap_panel">
+?>
+        </div>
+<div class="wrap_panel">
+<?=
+require $_SERVER['DOCUMENT_ROOT'] . '/includes/faq.inc.php';
 
-    <div class="wraper_faq">
-        <div class="faq_panel"> <h5>Какова стоимость путешествия </h5></div>
-        <div class="faq_answer"> <p> Стоимость путешествия зависит от страны</p></div>
-    </div>
-    <div class="wraper_faq">
-        <div class="faq_panel"> <h5>Есть ли страховка в путешествии? </h5></div>
-        <div class="faq_answer"> <p> Нет, все будет нормально</p></div>
-    </div>
-    <div class="wraper_faq">
-        <div class="faq_panel"> <h5> Нужен ли загранник для получения визы?</h5></div>
-        <div class="faq_answer"> <p> Да, очень нужен</p></div>
-    </div>
-
-</div> -->
+?>
+</div>
 
         <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A53668337e5785bee8127b031a1f8f4ba1a74ac0c23ed566812a0e5924e07e887&amp;source=constructor" width="1200" height="400" frameborder="0"></iframe>
 
