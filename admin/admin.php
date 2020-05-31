@@ -72,6 +72,9 @@ if (isset($_SESSION['login'])  &&  $_SESSION['role'] == 'admin') {
         <a href='users.admin.php'>
             <button class='button is-size-4 is-danger'>  Редактировать пользователей   </button>
         </a>
+        <a href='edfeed.admin.php'>
+            <button class='button is-size-4 is-danger'>  Редактировать отзывы  </button>
+        </a>
     </div>
 </div>");
 } elseif (isset($_SESSION['login'])  &&  $_SESSION['role'] == 'user'){

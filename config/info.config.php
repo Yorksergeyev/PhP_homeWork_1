@@ -107,6 +107,18 @@ if($result = $connect->query("SELECT * FROM feedback WHERE review = 1")){
     }
 }
 
+if($result = $connect->query("SELECT * FROM feedback")){
+    $feedback_more = ['id'=>[], 'topic'=>[], 'content' => [], 'author'=>[], 'created_at'=>[], 'review'=>[]];
+    while($row = $result->fetch_assoc()){
+        array_push($feedback_more['id'], $row['id']);
+        array_push($feedback_more['topic'], $row['topic']);
+        array_push($feedback_more['content'], $row['content']);
+        array_push($feedback_more['author'], $row['author']);
+        array_push($feedback_more['created_at'], $row['created_at']);
+        array_push($feedback_more['review'], $row['review']);
+    }
+}
+
 if($result = $connect->query("SELECT * FROM anchors")){
     $anchors_full = ['id'=>[],'anchor'=>[], 'content'=>[], 'ordera'=>[]];
     while($row = $result->fetch_assoc()){
