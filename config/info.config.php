@@ -7,6 +7,7 @@ $back = "<p> <a href=\"javascript: history.back()\">Вернуться наза�
 $back_timer = "<script>
 setTimeout(() => window.history.back(), 5000)
 </script>";
+$home =  "http://$_SERVER[HTTP_HOST]" . "/admin/admin.php";
 
 if($result = $connect-> query("SELECT * FROM keywords")){
     $keywords = [];
@@ -17,14 +18,14 @@ if($result = $connect-> query("SELECT * FROM keywords")){
 
 
 
-if($result = $connect->query("SELECT * FROM anchors")){
-    $anchors_full = ['id'=>[],'anchor'=>[], 'content'=>[], 'ordera'=>[]];
+if($result = $connect->query("SELECT * FROM users")){
+    $users = ['id'=>[],'email'=>[], 'login'=>[], 'role'=>[]];
     while($row = $result->fetch_assoc()){
 
-        array_push($anchors_full["id"], $row['id']);
-        array_push($anchors_full["anchor"], $row['anchor']);
-        array_push($anchors_full["content"], $row['content']);
-        array_push($anchors_full["ordera"], $row['ordera']);
+        array_push($users["id"], $row['id']);
+        array_push($users["email"], $row['email']);
+        array_push($users["login"], $row['login']);
+        array_push($users["role"], $row['role']);
 
     }
 }
@@ -39,13 +40,14 @@ if($result = $connect->query("SELECT * FROM parag")){
     }
 }
 
-if($result = $connect->query("SELECT * FROM users")){
-    $users = ['id'=>[],'login'=>[]];
+if($result = $connect->query("SELECT * FROM parag")){
+    $parag_full = ['id'=>[], 'content' =>[]];
     while($row = $result->fetch_assoc()){
-        array_push($users['id'], $row['id']);
-        array_push($users['login'], $row['login']);
+        array_push($parag_full['id'], $row['id']);
+        array_push($parag_full['content'], $row['content']);
     }
 }
+
 
 if($result = $connect->query("SELECT * FROM parag")){
     $parag_full = ['id'=>[], 'content' =>[]];
@@ -94,7 +96,30 @@ if($result = $connect->query("SELECT * FROM faq")){
         $i++;
     }
 }
-// print_r($faq);  
+
+if($result = $connect->query("SELECT * FROM feedback WHERE review = 1")){
+    $feedback = ['topic'=>[], 'content' => [], 'author'=>[], 'created_at'=>[]];
+    while($row = $result->fetch_assoc()){
+        array_push($feedback['topic'], $row['topic']);
+        array_push($feedback['content'], $row['content']);
+        array_push($feedback['author'], $row['author']);
+        array_push($feedback['created_at'], $row['created_at']);
+    }
+}
+
+if($result = $connect->query("SELECT * FROM anchors")){
+    $anchors_full = ['id'=>[],'anchor'=>[], 'content'=>[], 'ordera'=>[]];
+    while($row = $result->fetch_assoc()){
+
+        array_push($anchors_full["id"], $row['id']);
+        array_push($anchors_full["anchor"], $row['anchor']);
+        array_push($anchors_full["content"], $row['content']);
+        array_push($anchors_full["ordera"], $row['ordera']);
+
+    }
+}
+
+
 
 
 // $faq = [['Какова стоимость путешествия','Стоимость путешествия зависит от страны'], ['Нужен ли загранник для получения визы?', 'Да, очень нужен'], ['Есть ли страховка в путешествии?', 'Нет, все будет нормально']];
